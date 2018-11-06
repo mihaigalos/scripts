@@ -1,6 +1,7 @@
 from getnextmovie import MovieSeasonAndEpisodeExtractor
 
 msae = MovieSeasonAndEpisodeExtractor()
+msae.readLog()
 (season, episode, folder) = msae.parseLastMovie()
 
 print ("Season: " + str(season))
