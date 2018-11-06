@@ -1,4 +1,4 @@
-from subprocess import call
+import subprocess
 from getnextmovie import MovieSeasonAndEpisodeExtractor
 
 
@@ -12,6 +12,7 @@ def get_next_movie():
 
 next_movie = get_next_movie()
 
-args = ["kodi-send", "--action='PlayMedia(" + next_movie + ")'"]
-print(args)
-# call(args)
+args = ["kodi-send", "--action=PlayMedia(" + next_movie + ")"]
+#print(" ".join(args))
+subp = subprocess.Popen(args)
+out = subp.communicate()[0]
