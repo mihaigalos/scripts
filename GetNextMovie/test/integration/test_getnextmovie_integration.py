@@ -43,7 +43,7 @@ class FileFactory(unittest.TestCase):
 20:56:22.259 T:1438765824  NOTICE: deleting video codec
 20:56:22.270 T:1438765824  NOTICE: Closing stream player 3
 20:56:22.369 T:1926138368  NOTICE: VideoPlayer: finished waiting
-20:56:22.429 T:1926138368  NOTICE: VideoPlayer: Opening: """ + self.kodi_test_folder + """/media/Seagate_2TB/Series/Game.of.Thrones.S06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.S06E09.Battle.of.the.Bastards.720p.BluRay.DD5.1.x264-CtrlHD.mkv"""
+20:56:22.429 T:1926138368  NOTICE: VideoPlayer::OpenFile: """ + self.kodi_test_folder + """/media/Seagate_2TB/Series/Game.of.Thrones.S06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.S06E09.Battle.of.the.Bastards.720p.BluRay.DD5.1.x264-CtrlHD.mkv"""
         with open(self.kodi_test_folder + "/" + self.kodi_log_file, "w") as f:
             f.write(kodi_log)
             f.flush()

@@ -21,7 +21,7 @@ class MovieSeasonAndEpisodeExtractor(object):
         last_movies = []
         with open(kodi_log_file) as f:
             for line in f.readlines():
-                m = re.search('.*VideoPlayer:.*Opening: (.*)', line)
+                m = re.search('.*VideoPlayer::OpenFile: (.*)', line)
                 if m is not None:
                     last_movies.append(str(m.group(1)))
         self.last_movie = last_movies[-1]
