@@ -8,7 +8,7 @@ import fnmatch
 import re
 
 
-class FileFactory(unittest.TestCase):
+class IntegrationBase(unittest.TestCase):
     def createFolderStructure(self):
         self.kodi_test_folder = "test_MovieSeasonAndEpisodeExtractor"
         self.kodi_log_file = "kodi.log"
@@ -60,14 +60,14 @@ class FileFactory(unittest.TestCase):
         pass
 
 
-class NextSemanticSuggestionWorks(FileFactory):
+class NextSemanticSuggestionWorks(IntegrationBase):
     def test_whenFileExists(self):
         self.me.last_movie = self.kodi_test_folder + \
             "/media/Seagate_2TB/Series/Game.of.Thrones.S06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.S06E08.No.One.720p.BluRay.DD5.1.x264-CtrlHD.mkv"
         (season, episode, folder) = self.me.parseLastMovie()
         next_suggested_movie = self.me.getNextMovie()
-        self.assertEqual(next_suggested_movie, self.kodi_test_folder
-                         + '/media/Seagate_2TB/Series/Game.of.Thrones.S06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.S06E09.Battle.of.the.Bastards.720p.BluRay.DD5.1.x264-CtrlHD.mkv')
+        self.assertEqual(next_suggested_movie, self.kodi_test_folder +
+                         '/media/Seagate_2TB/Series/Game.of.Thrones.S06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.S06E09.Battle.of.the.Bastards.720p.BluRay.DD5.1.x264-CtrlHD.mkv')
 
     def test_whenFileDoesntExists(self):
         self.me.last_movie = self.kodi_test_folder + \
@@ -78,29 +78,12 @@ class NextSemanticSuggestionWorks(FileFactory):
             "Game.of.Thrones.S07E01.720p.HDTV.H264.RoSubbed-playTV.mp4" in next_suggested_movie)
 
 
-class NextSuggestionWorks(FileFactory):
-
-    def test_whenTypicalFolder(self):
-        self.me.last_movie = "/media/Seagate_2TB/Series/Game.of.Thrones.S06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.S06E09.Battle.of.the.Bastards.720p.BluRay.DD5.1.x264-CtrlHD.mkv"
-        (season, episode, folder) = self.me.parseLastMovie()
-        next_suggested_movie = self.me.getPotentialNextMovie()
-        self.assertEqual(
-            next_suggested_movie, '/media/Seagate_2TB/Series/Game.of.Thrones.S06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.S06E10')
-
-    def test_whenTypicalFolderDot(self):
-        self.me.last_movie = "/media/Seagate_2TB/Series/Game.of.Thrones.S06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.S06.E09.Battle.of.the.Bastards.720p.BluRay.DD5.1.x264-CtrlHD.mkv"
-        (season, episode, folder) = self.me.parseLastMovie()
-        next_suggested_movie = self.me.getPotentialNextMovie()
-        self.assertEqual(
-            next_suggested_movie, '/media/Seagate_2TB/Series/Game.of.Thrones.S06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.S06.E10')
-
-
-class ReadLogWorks(FileFactory):
+class ReadLogWorks(IntegrationBase):
     def test_whenTypical(self):
         self.me.readLog(self.kodi_test_folder + "/" + self.kodi_log_file)
         self.me.parseLastMovie()
-        self.assertEqual(self.me.last_movie, self.kodi_test_folder
-                         + '/media/Seagate_2TB/Series/Game.of.Thrones.S06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.S06E09.Battle.of.the.Bastards.720p.BluRay.DD5.1.x264-CtrlHD.mkv')
+        self.assertEqual(self.me.last_movie, self.kodi_test_folder +
+                         '/media/Seagate_2TB/Series/Game.of.Thrones.S06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.S06E09.Battle.of.the.Bastards.720p.BluRay.DD5.1.x264-CtrlHD.mkv')
 
 
 if __name__ == '__main__':
