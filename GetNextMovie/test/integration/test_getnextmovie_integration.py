@@ -60,7 +60,7 @@ class IntegrationBase(unittest.TestCase):
         pass
 
 
-class NextSemanticSuggestionWorks(IntegrationBase):
+class NextSeriesSuggestionWorks(IntegrationBase):
     def test_whenFileExists(self):
         self.me.last_movie = self.kodi_test_folder + \
             "/media/Seagate_2TB/Series/Game.of.Thrones.S06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.S06E08.No.One.720p.BluRay.DD5.1.x264-CtrlHD.mkv"
