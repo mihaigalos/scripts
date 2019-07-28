@@ -66,8 +66,8 @@ class NextSemanticSuggestionWorks(FileFactory):
             "/media/Seagate_2TB/Series/Game.of.Thrones.S06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.S06E08.No.One.720p.BluRay.DD5.1.x264-CtrlHD.mkv"
         (season, episode, folder) = self.me.parseLastMovie()
         next_suggested_movie = self.me.getNextMovie()
-        self.assertEqual(next_suggested_movie, self.kodi_test_folder +
-                         '/media/Seagate_2TB/Series/Game.of.Thrones.S06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.S06E09.Battle.of.the.Bastards.720p.BluRay.DD5.1.x264-CtrlHD.mkv')
+        self.assertEqual(next_suggested_movie, self.kodi_test_folder
+                         + '/media/Seagate_2TB/Series/Game.of.Thrones.S06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.S06E09.Battle.of.the.Bastards.720p.BluRay.DD5.1.x264-CtrlHD.mkv')
 
     def test_whenFileDoesntExists(self):
         self.me.last_movie = self.kodi_test_folder + \
@@ -95,47 +95,12 @@ class NextSuggestionWorks(FileFactory):
             next_suggested_movie, '/media/Seagate_2TB/Series/Game.of.Thrones.S06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.S06.E10')
 
 
-class ParsingWorks(unittest.TestCase):
-    def setUp(self):
-        self.me = MovieSeasonAndEpisodeExtractor()
-
-    def test_whenTypicalFolder(self):
-        self.me.last_movie = "/media/Seagate_2TB/Series/Game.of.Thrones.S06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.S06E09.Battle.of.the.Bastards.720p.BluRay.DD5.1.x264-CtrlHD.mkv"
-        (season, episode, folder) = self.me.parseLastMovie()
-        self.assertEqual(
-            folder, '/media/Seagate_2TB/Series/Game.of.Thrones.S06.720p.BluRay.DD5.1.x264-CtrlHD')
-
-    def test_whenTypicalUppercase(self):
-        self.me.last_movie = "/media/Seagate_2TB/Series/Game.of.Thrones.S06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.S06E09.Battle.of.the.Bastards.720p.BluRay.DD5.1.x264-CtrlHD.mkv"
-        (season, episode, folder) = self.me.parseLastMovie()
-        self.assertEqual(season, 'S06')
-        self.assertEqual(episode, 'E09')
-
-    def test_whenTypicalLowercase(self):
-        self.me.last_movie = "/media/Seagate_2TB/Series/Game.of.Thrones.s06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.s06e09.Battle.of.the.Bastards.720p.BluRay.DD5.1.x264-CtrlHD.mkv"
-        (season, episode, folder) = self.me.parseLastMovie()
-        self.assertEqual(season, 's06')
-        self.assertEqual(episode, 'e09')
-
-    def test_whenTypicalWithDotUppercase(self):
-        self.me.last_movie = "/media/Seagate_2TB/Series/Game.of.Thrones.S06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.S06.E09.Battle.of.the.Bastards.720p.BluRay.DD5.1.x264-CtrlHD.mkv"
-        (season, episode, folder) = self.me.parseLastMovie()
-        self.assertEqual(season, 'S06')
-        self.assertEqual(episode, 'E09')
-
-    def test_whenTypicalWithDotLowercase(self):
-        self.me.last_movie = "/media/Seagate_2TB/Series/Game.of.Thrones.s06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.s06.e09.Battle.of.the.Bastards.720p.BluRay.DD5.1.x264-CtrlHD.mkv"
-        (season, episode, folder) = self.me.parseLastMovie()
-        self.assertEqual(season, 's06')
-        self.assertEqual(episode, 'e09')
-
-
 class ReadLogWorks(FileFactory):
     def test_whenTypical(self):
         self.me.readLog(self.kodi_test_folder + "/" + self.kodi_log_file)
         self.me.parseLastMovie()
-        self.assertEqual(self.me.last_movie, self.kodi_test_folder +
-                         '/media/Seagate_2TB/Series/Game.of.Thrones.S06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.S06E09.Battle.of.the.Bastards.720p.BluRay.DD5.1.x264-CtrlHD.mkv')
+        self.assertEqual(self.me.last_movie, self.kodi_test_folder
+                         + '/media/Seagate_2TB/Series/Game.of.Thrones.S06.720p.BluRay.DD5.1.x264-CtrlHD/Game.of.Thrones.S06E09.Battle.of.the.Bastards.720p.BluRay.DD5.1.x264-CtrlHD.mkv')
 
 
 if __name__ == '__main__':
