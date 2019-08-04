@@ -14,7 +14,7 @@ echo "\nDumping microSD contents.."
 sudo dd if=/dev/sdc | pv | dd of=pi_backup.img
 
 echo "\nShrinking and producing final image.."
-sudo ./pishrink.sh -s pi_backup.img output_filename
+sudo ./pishrink.sh -s pi_backup.img $output_filename
 
 echo "\nRemoving initial image dump.."
 rm pi_backup.img
