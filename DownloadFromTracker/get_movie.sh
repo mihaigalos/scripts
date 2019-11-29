@@ -5,7 +5,7 @@ password=$2
 tracker=$3
 movie="${@:4:99}"
 
-temp_folder="/mnt/Vera_SeagateC/incomplete" #no use of mktemp since not encrypted
+temp_folder="/mnt/Vera_SeagateC/incomplete" # no use of mktemp since not encrypted
 
 movie=${movie// /+} # substitute spaces for plusses
 
