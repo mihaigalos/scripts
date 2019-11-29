@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euxo pipefail
+set -euo pipefail
 
 script_path=$(dirname $(readlink -f `which invoke_get_movie.sh`))
 username=`sudo cat "$script_path/user"`
