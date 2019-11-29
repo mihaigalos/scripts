@@ -1,8 +1,8 @@
 #! /bin/bash
-declare username=$1
-declare password=$2
-declare tracker=$3
-declare movie="${@:4:99}"
+username=$1
+password=$2
+tracker=$3
+movie="${@:4:99}"
 
 temp_folder="/mnt/Vera_SeagateC/incomplete"
 
