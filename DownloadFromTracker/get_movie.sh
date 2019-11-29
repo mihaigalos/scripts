@@ -17,9 +17,6 @@ raw_result=`echo "$suggestions" \
 | sed -e "s/<\/b><\/a>/\n/g" \
 | grep -P "^id=[0-9]+'" `
 
-
-echo $raw_result
-
 if ((`echo "$raw_result" | wc -m ` == 1)); then
   echo No results.
   exit 1
