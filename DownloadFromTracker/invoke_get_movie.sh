@@ -2,8 +2,9 @@
 
 set -euxo pipefail
 
-username=`sudo cat user`
-password=`sudo cat pass`
-tracker=`sudo cat tracker`
+script_path=$(dirname $(readlink -f `which invoke_get_movie.sh`))
+username=`sudo cat "$script_path/user"`
+password=`sudo cat "$script_path/pass"`
+tracker=`sudo cat "$script_path/tracker"`
 
-./get_movie.sh $username $password $tracker "$*"
+"$script_path"/get_movie.sh $username $password $tracker "$*"
