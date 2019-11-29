@@ -27,7 +27,7 @@ fi
 
 choice=`echo "$raw_result" \
 | sed -e "s/id=//g" -e "s/'//g" -e "s/title=\(.*\)/\"\1\"/g" -e "s/><b>.*\"/\"/" \
-| xargs dialog --stdout --clear --backtitle "Backtitle here" --title "Get movie" --menu "Choose one of the following options:" 15 60 10`
+| xargs dialog --stdout --clear --title "Get movie" --menu "Choose one of the following options:" 15 60 10`
 
 torrent="$tracker/download.php?id=$choice"
 curl --silent -b "$temp_folder/tracker_cookies.txt" "$torrent" > "$temp_folder"/new_torrent.torrent
