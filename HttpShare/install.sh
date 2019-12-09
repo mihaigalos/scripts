@@ -1,3 +1,5 @@
+#! /bin/bash
+
 build_docker() {
     cat <<EOT >Dockerfile
     FROM python:latest
