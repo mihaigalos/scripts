@@ -1,6 +1,6 @@
 #! /bin/bash
 
-folder=$1
+folder=$(realpath $1)
 port=$2
 
 #using tmux to keep server up after ssh close.
