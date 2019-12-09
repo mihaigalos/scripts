@@ -8,3 +8,7 @@ EOT
 docker build -t python_http_server .
 
 rm Dockerfile
+
+target="share.sh"
+sudo ln -s `realpath "$target"` /usr/local/bin/"$target"
+echo alias share=\"$target\" >> ~/.zshrc
