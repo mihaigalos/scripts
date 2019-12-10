@@ -17,9 +17,6 @@ build_docker() {
 EOT
 
     docker build -t python_https_server .
-
-    rm Dockerfile
-    rm server_certificate.pem
 }
 
 make_available_everywhere() {
@@ -30,6 +27,12 @@ make_available_everywhere() {
     fi
 }
 
+teardown() {
+    rm Dockerfile
+    rm server_certificate.pem
+}
+
 create_server_certificate
 build_docker
 make_available_everywhere
+teardown
