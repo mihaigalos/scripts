@@ -24,6 +24,7 @@ make_available_everywhere() {
     if [ ! -f /usr/local/bin/"$target" ]; then
         sudo ln -s `realpath "$target"` /usr/local/bin/"$target"
         echo alias share=\"$target\" >> ~/.zshrc
+	source ~/.zshrc
     fi
 }
 
@@ -36,3 +37,4 @@ create_server_certificate
 build_docker
 make_available_everywhere
 teardown
+
