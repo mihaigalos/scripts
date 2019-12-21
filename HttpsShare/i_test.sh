@@ -22,7 +22,7 @@ arrange() {
 
 act() {
     ./share.sh $temp_folder $port $username $password
-    sleep 2s
+    sleep 5s
 }
 
 assert() {
