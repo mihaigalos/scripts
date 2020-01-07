@@ -32,6 +32,6 @@ if currentIp == lastKnownIp:
 	pass
 else:
 	writeCurrentIp(currentIp)
-	command = "sudo "+kBlinkOneTool+"  --magenta --millis=2000 --flash -1 --delay=2000 > /dev/null &"
+	command = "sudo "+kBlinkOneTool+" --led=2 --magenta --millis=2000 --flash -1 --delay=2000 > /dev/null &"
 	os.system(command)
 
