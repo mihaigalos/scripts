@@ -1,3 +1,5 @@
+#! /usr/bin/python3
+
 from dialog import Dialog
 import json
 import requests
@@ -17,9 +19,9 @@ def setup():
 
 
 def construct_url(argv):
-    tracker = argv[0]
-    username = argv[1]
-    token = argv[2]
+    tracker = argv[2]
+    username = argv[0]
+    token = argv[1]
     query = "%20".join(argv[3:])
     url = tracker+'/api.php?username='+username+'&passkey=' + \
         token+'&action=search-torrents&type=name&query='+query
@@ -94,7 +96,7 @@ def main(argv):
     torrent_url = make_dialog(filtered)
 
     if torrent_url:
-        download(torrent_url, torrent)
+        download(torrent_url, destination+"/"+torrent)
         delegate_to_transmission()
 
 
