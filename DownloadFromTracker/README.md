@@ -14,3 +14,9 @@
 ## Screenshot
 
 ![alt text](screenshots/screenshot.png "Why?!")
+
+## Menu explanation
+
+* 1st column: Id
+* 2nd column: Seeders
+* 3rd column: Name
