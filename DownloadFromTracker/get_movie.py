@@ -67,11 +67,11 @@ def make_dialog(input):
             result.append((k, v["seeders"]+" "+v["name"]))
         return result
     d = Dialog(dialog="dialog")
-    d.set_background_title("Dialog")
+    d.set_background_title("Download")
 
     choices = to_list_of_tuples(input)
 
-    code, tag = d.menu("OK, then you have two options:",
+    code, tag = d.menu("Results:",
                        choices=choices)
     if code == d.OK:
         return input[tag]["link"]
