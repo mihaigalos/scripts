@@ -35,16 +35,12 @@ def get_results(url):
 
 def prefilter(raw_data):
     result = {}
-    i = 0
     for element in raw_data:
         result[str(element["id"])] = {
             "name": element["name"],
             "link": element["download_link"],
             "seeders": str(element["seeders"])}
 
-        if i == 10:
-            break
-        i += 1
     return result
 
 
