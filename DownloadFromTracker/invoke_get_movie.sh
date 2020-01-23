@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -xeuo pipefail
-
 script_path=$(dirname $(readlink -f `which invoke_get_movie.sh`))
 username=`sudo cat "$script_path/user"`
 password=`sudo cat "$script_path/pass"`
