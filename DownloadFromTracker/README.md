@@ -13,7 +13,8 @@
 
 ## Screenshot
 
-![alt text](screenshots/screenshot.png "Why?!")
+![alt text](screenshots/pc.png "pc")
+![alt text](screenshots/phone.png "phone")
 
 ## Menu explanation
 
