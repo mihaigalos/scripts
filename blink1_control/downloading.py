@@ -23,12 +23,14 @@ class TranmissionProvider():
 
     def is_active_download(self):
         downloads = self.get()
-           if downloads > 0:
-                return True
-            return False
+        if downloads > 0:
+            return True
+        return False
 
+def blink_14_times_a_4_seconds():
+    command = "sudo "+kBlinkOneTool + \
+        " --led=2 --green --blink 20 --delay 1500 --millis 1500 > /dev/null"
+    os.system(command)
 
 if TranmissionProvider().is_active_download():
-    command = "sudo "+kBlinkOneTool + \
-        " --led=2 --green --blink 1 --delay 2000 --millis 5000 > /dev/null &"
-    os.system(command)
+    blink_14_times_a_4_seconds()
