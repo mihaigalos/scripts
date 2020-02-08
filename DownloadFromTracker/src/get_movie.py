@@ -62,6 +62,7 @@ def make_dialog(input):
         for k, v in input.items():
             result.append((k, v["seeders"]+" "+v["name"]))
         return result
+
     d = Dialog(dialog="dialog")
     d.set_background_title("Download")
 
@@ -89,11 +90,13 @@ def main(argv):
     url = construct_url(argv)
     results = get_results(url)
     filtered = prefilter(json.loads(results))
-    torrent_url = make_dialog(filtered)
-
-    if torrent_url:
-        download(torrent_url, destination+"/"+torrent)
-        delegate_to_transmission()
+    if filtered:
+        torrent_url = make_dialog(filtered)
+        if torrent_url:
+            download(torrent_url, destination+"/"+torrent)
+            delegate_to_transmission()
+    else:
+        print("No results.")
 
 
 if __name__ == "__main__":
