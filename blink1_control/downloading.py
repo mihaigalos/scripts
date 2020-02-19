@@ -4,7 +4,7 @@ from os.path import expanduser
 import subprocess
 
 home = expanduser("~")
-kBlinkOneTool = home+"/git/blink1_control/blink1-tool"
+kBlinkOneTool = home+"/git/utils/blink1_control/blink1-tool"
 
 
 class TranmissionProvider():
