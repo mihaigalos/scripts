@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function setup_zsh() {
+function setup_oh_my_zsh() {
     
     sudo apt update
     sudo apt -y install zsh
@@ -21,5 +21,5 @@ function cd {
 EOF
 }
 
-setup_zsh
+setup_oh_my_zsh
 
