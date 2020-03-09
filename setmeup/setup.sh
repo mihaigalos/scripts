@@ -5,3 +5,7 @@ do
     bash -c $file
 done
 
+pushd pi
+./setup.sh
+popd
+
