@@ -5,7 +5,7 @@ rasperry_pi_model_file="/proc/device-tree/model"
 function run_files_with_setup_prefix() {
     for file in ./setup_*
     do
-        echo bash -c $file
+        bash -c $file
     done
 }
 
