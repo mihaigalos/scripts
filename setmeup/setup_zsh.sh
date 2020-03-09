@@ -13,6 +13,7 @@ HISTSIZE=9999999
 SAVEHIST=$HISTSIZE
 
 export EDITOR=vim
+export LC_ALL="en_US.UTF-8"
 
 function cd {
     builtin cd "$@" && l
