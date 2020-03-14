@@ -2,10 +2,11 @@
 
 from dialog import Dialog
 import json
-import requests
-import sys
-import subprocess
+import math
 import os
+import requests
+import subprocess
+import sys
 
 destination = "/mnt/Vera_SeagateC/incomplete"
 torrent = "new_torrent.torrent"
@@ -33,12 +34,23 @@ def get_results(url):
     return results
 
 
+def convert_size(size_bytes):
+   if size_bytes == 0:
+       return "0B"
+   size_name = ("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")
+   i = int(math.floor(math.log(size_bytes, 1024)))
+   p = math.pow(1024, i)
+   s = round(size_bytes / p, 2)
+   return "%s%s" % (s, size_name[i])
+
+
 def prefilter(raw_data):
     result = {}
     for element in raw_data:
         result[str(element["id"])] = {
             "name": element["name"],
             "link": element["download_link"],
+            "size": convert_size(int(element["size"])),
             "seeders": str(element["seeders"])}
 
     return result
@@ -60,7 +72,7 @@ def make_dialog(input):
         result = []
 
         for k, v in input.items():
-            result.append((k, v["seeders"]+" "+v["name"]))
+            result.append((k, v["seeders"]+" "+v["size"]+" "+v["name"]))
         return result
 
     d = Dialog(dialog="dialog")
@@ -71,6 +83,7 @@ def make_dialog(input):
     code, tag = d.menu("Results:",
                        choices=choices)
     if code == d.OK:
+        print(tag)
         return input[tag]["link"]
 
     return None
