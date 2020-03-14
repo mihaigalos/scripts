@@ -69,22 +69,36 @@ def download(url, output_file):
 
 def make_dialog(input):
     def format(key, value):
-        rest_of_line=value["seeders"].ljust(3)+" "+value["size"].ljust(6)+" "+value["name"]
+        rest_of_line=str(value[0]).ljust(3)+" "+str(value[1]).ljust(6)+" "+str(value[2])
         line = (key, rest_of_line)
         return line
 
+    def sort_list_of_tuples(input, column):
+        return sorted(input, key=lambda x: x[column], reverse=True)
 
     def to_list_of_tuples(input):
-        result = []
+        output = []
 
-        for k, v in input.items():
-            result.append(format(k,v))
-        return result
+        for key, value in input.items():
+            output.append((key, int(value["seeders"]), value["size"], value["name"]))
+        return output
+
+    def squash_to_kv_pair(items):
+        output = []
+        for item in items:
+            output.append(format(item[0], item[1:]))
+        print(output)
+        return output
+
+    def create_choices(input):
+        list_of_tuples = to_list_of_tuples(input)
+        list_of_tuples = sort_list_of_tuples(list_of_tuples,column=1)
+        return squash_to_kv_pair(list_of_tuples)
 
     d = Dialog(dialog="dialog")
     d.set_background_title("Download")
 
-    choices = to_list_of_tuples(input)
+    choices = create_choices(input)
 
     code, tag = d.menu("Results:",
                        choices=choices)
