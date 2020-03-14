@@ -37,7 +37,7 @@ def get_results(url):
 def convert_size(size_bytes):
    if size_bytes == 0:
        return "0B"
-   size_name = ("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")
+   size_name = ("B", "K", "M", "G", "T", "P", "E", "Z", "Y")
    i = int(math.floor(math.log(size_bytes, 1024)))
    p = math.pow(1024, i)
    s = round(size_bytes / p, 2)
@@ -68,11 +68,17 @@ def download(url, output_file):
 
 
 def make_dialog(input):
+    def format(key, value):
+        rest_of_line=value["seeders"].ljust(3)+" "+value["size"].ljust(6)+" "+value["name"]
+        line = (key, rest_of_line)
+        return line
+
+
     def to_list_of_tuples(input):
         result = []
 
         for k, v in input.items():
-            result.append((k, v["seeders"]+" "+v["size"]+" "+v["name"]))
+            result.append(format(k,v))
         return result
 
     d = Dialog(dialog="dialog")
