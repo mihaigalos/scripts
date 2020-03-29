@@ -16,8 +16,9 @@ export EDITOR=vim
 export LC_ALL="en_US.UTF-8"
 
 function cd {
-    builtin cd "$@" && l
+    builtin cd "\$@" && l
 }
+
 EOF
 }
 
