@@ -50,10 +50,12 @@ def flash_led(times, delay, color):
 
 def get_color_for_speed(speed):
     speed=int(speed)
-    if speed<500000:
+    if speed<500*1024:
         return "red"
-    elif speed < 1500000:
+    elif speed < 1*1024*1024:
         return "yellow"
+    elif speed < 1500*1024:
+        return "cyan"
     else:
         return "green"
 
