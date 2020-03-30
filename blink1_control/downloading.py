@@ -8,7 +8,7 @@ kBlinkOneTool = home+"/git/utils/blink1_control/blink1-tool"
 
 class SystemProvider():
     def get_speed(self):
-        bashCommand = "sudo /usr/sbin/iftop -B -t -s 1 2>/dev/null | grep Total\ receive\ rate: | awk '{print $4}'"
+        bashCommand = "sudo /usr/sbin/iftop -B -t -s 1 2>/dev/null | grep Total\ receive\ rate: | awk '{print $6}'"
         output, error = subprocess.Popen(
                 bashCommand, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
             ).communicate()
