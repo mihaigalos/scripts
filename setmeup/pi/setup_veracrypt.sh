@@ -2,7 +2,7 @@
 
 function setup_veracrypt() {
     sudo apt-get update
-    sudo apt-get install -y libfuse-dev makeself libwxbase3.0-0v5
+    sudo apt-get install -y libfuse-dev makeself libwxbase3.0-0v5 bzip2
     mkdir -p veracryptfiles
     cd veracryptfiles
     
