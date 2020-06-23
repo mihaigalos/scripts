@@ -8,7 +8,7 @@ import requests
 import subprocess
 import sys
 
-destination = "/mnt/Vera_SeagateC/incomplete"
+destination = "/mnt/VeraC/incomplete"
 torrent = "new_torrent.torrent"
 
 
@@ -55,17 +55,11 @@ def prefilter(raw_data):
 
     return result
 
-
-def download(url, output_file):
+def download(url, file_name):
     print("Downloading: ", url)
-    with requests.get(url, stream=True) as r:
-        r.raise_for_status()
-        with open(output_file, 'wb') as f:
-            for chunk in r.iter_content(chunk_size=8192):
-                if chunk:  # filter out keep-alive new chunks
-                    f.write(chunk)
-                    f.flush()
-
+    with open(file_name, "wb") as file:
+        response = requests.get(url)
+        file.write(response.content)
 
 def make_dialog(input):
     def format(key, value):
