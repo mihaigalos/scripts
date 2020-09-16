@@ -64,7 +64,12 @@ function setup_vim() {
 
     mkdir -p ~/.vim/colors
     pushd ~/.vim/colors
-    wget https://raw.githubusercontent.com/mihaigalos/molokai/master/colors/molokai.vim
+    wget https://raw.githubusercontent.com/mihaigalos/onedark.vim/master/colors/onedark.vim
+    popd
+
+    mkdir -p ~/.vim/autoload
+    pushd ~/.vim/autoload
+    wget https://raw.githubusercontent.com/mihaigalos/onedark.vim/master/autoload/onedark.vim
     popd
     
     pushd ~
