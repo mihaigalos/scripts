@@ -7,7 +7,10 @@ function setup_oh_my_zsh() {
 
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+    wget https://gist.githubusercontent.com/mihaigalos/bde132c03ba2ae6a5f4d5c0cfedbcd61/raw/3fe5d6461005981bd529e124f728a88e5949063c/af-magic-time.zsh-theme ~/.oh-my-zsh/themes
+
     cat << EOF >> ~/.zshrc
+ZSH_THEME="af-magic-time"
 HISTFILE=~/.zsh_history
 HISTSIZE=9999999
 SAVEHIST=$HISTSIZE
