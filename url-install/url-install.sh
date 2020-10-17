@@ -49,4 +49,4 @@ extract_command "$FILE"
 
 EXECUTABLE=$(determine_executable "$COMMAND" "$FILE_WITHOUT_EXTENSION")
 
-echo mv "$EXECUTABLE" /usr/bin/"$COMMAND"
+mv "$EXECUTABLE" /usr/bin/"$COMMAND"
