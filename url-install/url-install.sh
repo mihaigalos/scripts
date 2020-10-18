@@ -37,16 +37,21 @@ function determine_executable() {
 
 ###################### Logic
 
-TARGET=$1
-FILE="${TARGET##*/}"
-FILE_WITHOUT_EXTENSION="${FILE%.*}"
-COMMAND=$(echo $FILE | cut -d '-' -f1)
 
-cd $(mktemp -d)
-wget --quiet "${TARGET}"
+for TARGET in "$@"
+do
 
-extract_command "$FILE"
+    FILE="${TARGET##*/}"
+    FILE_WITHOUT_EXTENSION="${FILE%.*}"
+    COMMAND=$(echo $FILE | cut -d '-' -f1)
 
-EXECUTABLE=$(determine_executable "$COMMAND" "$FILE_WITHOUT_EXTENSION")
+    cd $(mktemp -d)
+    wget --quiet "${TARGET}"
 
-mv "$EXECUTABLE" /usr/bin/"$COMMAND"
+    extract_command "$FILE"
+
+    EXECUTABLE=$(determine_executable "$COMMAND" "$FILE_WITHOUT_EXTENSION")
+
+    mv "$EXECUTABLE" /usr/bin/"$COMMAND"
+
+done
