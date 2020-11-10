@@ -35,13 +35,13 @@ def get_results(url):
 
 
 def convert_size(size_bytes):
-   if size_bytes == 0:
-       return "0B"
-   size_name = ("B", "K", "M", "G", "T", "P", "E", "Z", "Y")
-   i = int(math.floor(math.log(size_bytes, 1024)))
-   p = math.pow(1024, i)
-   s = round(size_bytes / p, 2)
-   return "%s%s" % (s, size_name[i])
+    if size_bytes == 0:
+        return "0B"
+    size_name = ("B", "K", "M", "G", "T", "P", "E", "Z", "Y")
+    i = int(math.floor(math.log(size_bytes, 1024)))
+    p = math.pow(1024, i)
+    s = round(size_bytes / p, 2)
+    return "%s%s" % (s, size_name[i])
 
 
 def prefilter(raw_data):
@@ -63,7 +63,8 @@ def download(url, file_name):
 
 def make_dialog(input):
     def format(key, value):
-        rest_of_line=str(value[0]).ljust(3)+" "+str(value[1]).ljust(6)+" "+str(value[2])
+        rest_of_line = str(value[0]).ljust(
+            3)+" "+str(value[1]).ljust(6)+" "+str(value[2])
         line = (key, rest_of_line)
         return line
 
@@ -74,7 +75,8 @@ def make_dialog(input):
         output = []
 
         for key, value in input.items():
-            output.append((key, int(value["seeders"]), value["size"], value["name"]))
+            output.append(
+                (key, int(value["seeders"]), value["size"], value["name"]))
         return output
 
     def squash_to_kv_pair(items):
@@ -86,7 +88,7 @@ def make_dialog(input):
 
     def create_choices(input):
         list_of_tuples = to_list_of_tuples(input)
-        list_of_tuples = sort_list_of_tuples(list_of_tuples,column=1)
+        list_of_tuples = sort_list_of_tuples(list_of_tuples, column=1)
         return squash_to_kv_pair(list_of_tuples)
 
     d = Dialog(dialog="dialog")
