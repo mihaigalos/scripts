@@ -1,3 +1,7 @@
+.vscode
 *.pyc
 *.save
 bazel-*
+user
+pass
+tracker
