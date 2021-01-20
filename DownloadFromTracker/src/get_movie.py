@@ -23,7 +23,10 @@ def construct_url(argv):
     tracker = argv[2]
     username = argv[0]
     token = argv[1]
-    query = "%20".join(argv[3:])
+
+    query_list =argv[3:]
+
+    query = "%20".join(query_list[0].split(" "))
     url = tracker+'/api.php?username='+username+'&passkey=' + \
         token+'&action=search-torrents&type=name&query='+query
     return url
