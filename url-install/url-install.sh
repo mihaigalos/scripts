@@ -52,6 +52,6 @@ do
 
     EXECUTABLE=$(determine_executable "$COMMAND" "$FILE_WITHOUT_EXTENSION")
 
-    mv "$EXECUTABLE" /usr/bin/"$COMMAND"
+    mv "$EXECUTABLE" ~/.local/bin/"$COMMAND"
 
 done
