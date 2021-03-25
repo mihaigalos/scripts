@@ -3,7 +3,7 @@
 function setup_oh_my_zsh() {
     
     sudo apt update
-    sudo apt -y install zsh
+    sudo apt -y install curl terminator zsh
 
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     sed -i -e 's/ZSH_THEME.*/ZSH_THEME="af-magic-time"/' ~/.zshrc
