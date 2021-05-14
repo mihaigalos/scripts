@@ -1,6 +1,6 @@
 #! /bin/sh
 
-cat <<EOF >/etc/systemd/system/connect_to_hidden_wifi.service
+cat <<EOF >/lib/systemd/system/connect_to_hidden_wifi.service
 
 [Unit]
 Description=Manually connect to hidden WiFi
@@ -14,3 +14,6 @@ RemainAfterExit=yes
 WantedBy=multi-user.target
 
 EOF
+
+ln -s /lib/systemd/system/connect_to_hidden_wifi.service /etc/systemd/system/connect_to_hidden_wifi.service
+
