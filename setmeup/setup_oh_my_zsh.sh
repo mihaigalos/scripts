@@ -18,8 +18,9 @@ SAVEHIST=$HISTSIZE
 export EDITOR=vim
 export LC_ALL="en_US.UTF-8"
 
-[ -x "\$(command -v kubectl)" ] && alias k='kubectl'
 [ -x "\$(command -v exa)" ] && alias l='exa -all'
+[ -x "\$(command -v kubectl)" ] && alias k='kubectl'
+[ -x "\$(command -v xclip)" ] && alias xclip='xclip -selection clipboard'
 
 function cd {
     builtin cd "\$@" && l
