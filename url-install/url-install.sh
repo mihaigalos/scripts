@@ -37,7 +37,7 @@ function determine_executable() {
 
 ###################### Logic
 
-
+[ -z $TERM ] && TERM=xterm
 for TARGET in "$@"
 do
 
