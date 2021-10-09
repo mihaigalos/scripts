@@ -52,5 +52,5 @@ do
     EXECUTABLE=$(determine_executable "$COMMAND" "$FILE_WITHOUT_EXTENSION")
 
     mv "$EXECUTABLE" ~/.local/bin/"$COMMAND"
-    printf '%*s\n' "${COLUMNS:-$(tput -T cols)}" '' | tr ' ' -
+    printf %"$COLUMNS"s | tr " " "-"
 done
