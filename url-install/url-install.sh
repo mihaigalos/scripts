@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 ####################### Utils
 set -xue
@@ -36,7 +36,6 @@ function determine_executable() {
 }
 
 ###################### Logic
-COLUMNS=${COLUMNS:-'100'}
 for TARGET in "$@"
 do
 
@@ -52,5 +51,5 @@ do
     EXECUTABLE=$(determine_executable "$COMMAND" "$FILE_WITHOUT_EXTENSION")
 
     mv "$EXECUTABLE" ~/.local/bin/"$COMMAND"
-    printf %"$COLUMNS"s | tr " " "-"
+    printf %"100"s | tr " " "-" && echo
 done
