@@ -37,7 +37,6 @@ function determine_executable() {
 
 ###################### Logic
 
-[ -z $TERM ] && TERM=xterm
 for TARGET in "$@"
 do
 
@@ -53,5 +52,5 @@ do
     EXECUTABLE=$(determine_executable "$COMMAND" "$FILE_WITHOUT_EXTENSION")
 
     mv "$EXECUTABLE" ~/.local/bin/"$COMMAND"
-    printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' -
+    printf '%*s\n' "${COLUMNS:-$(tput -T cols)}" '' | tr ' ' -
 done
