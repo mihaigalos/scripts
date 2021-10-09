@@ -36,7 +36,7 @@ function determine_executable() {
 }
 
 ###################### Logic
-
+[ -z $COLUMNS ] && COLUMNS=100
 for TARGET in "$@"
 do
 
