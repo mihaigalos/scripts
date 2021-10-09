@@ -51,5 +51,5 @@ do
     EXECUTABLE=$(determine_executable "$COMMAND" "$FILE_WITHOUT_EXTENSION")
 
     mv "$EXECUTABLE" ~/.local/bin/"$COMMAND"
-    printf %"100"s | tr " " "-" && echo
+    printf %"100"s | tr " " "-"
 done
