@@ -37,9 +37,8 @@ COMPUTE_CHECKSUMS_ONLY=False
 
 until test "$1" = ""
 do
-    printf %"100"s | tr " " "-" && echo
     TARGET=$1; 
-    [ $COMPUTE_CHECKSUMS_ONLY = False ] && CHECKSUM=$1 && shift && TARGET=$1 
+    [ $COMPUTE_CHECKSUMS_ONLY = False ] && printf %"100"s | tr " " "-" && echo && shift && CHECKSUM=$1
     shift
 
     FILE="${TARGET##*/}"
@@ -48,7 +47,7 @@ do
 
     cd $(mktemp -d)
     wget --quiet "${TARGET}"
-    [ $COMPUTE_CHECKSUMS_ONLY = True ] && sha256sum $FILE | cut -d ' ' -f1 | tr '\n' ' ' && echo "$TARGET \\" && continue
+    [ $COMPUTE_CHECKSUMS_ONLY = True ] && echo -n "$TARGET "&& sha256sum $FILE | cut -d ' ' -f1 | tr '\n' ' ' && echo " \\" && continue
     echo "$CHECKSUM $FILE" | sha256sum -c || err "Checksum mismatch: $CHECKSUM incorrect."
     extract_command "$FILE"
 
