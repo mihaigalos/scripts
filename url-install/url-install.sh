@@ -1,8 +1,5 @@
 #!/bin/bash
 
-####################### Utils
-set -xue
-
 function err() {
     echo -e "\e[1;31m${@}\e[0m" >&2
     exit 1
@@ -35,9 +32,15 @@ function determine_executable() {
     echo $SOURCE
 }
 
-###################### Logic
-for TARGET in "$@"
+COMPUTE_CHECKSUMS_ONLY=False
+[ $1 = "--compute_checksums_only" ] && COMPUTE_CHECKSUMS_ONLY=True && shift
+
+until test "$1" = ""
 do
+    printf %"100"s | tr " " "-" && echo
+    TARGET=$1; 
+    [ $COMPUTE_CHECKSUMS_ONLY = False ] && CHECKSUM=$1 && shift && TARGET=$1 
+    shift
 
     FILE="${TARGET##*/}"
     FILE_WITHOUT_EXTENSION="${FILE%.*}"
@@ -45,11 +48,13 @@ do
 
     cd $(mktemp -d)
     wget --quiet "${TARGET}"
-
+    [ $COMPUTE_CHECKSUMS_ONLY = True ] && sha256sum $FILE | cut -d ' ' -f1 | tr '\n' ' ' && echo "$TARGET \\" && continue
+    echo "$CHECKSUM $FILE" | sha256sum -c || err "Checksum mismatch: $CHECKSUM incorrect."
     extract_command "$FILE"
 
     EXECUTABLE=$(determine_executable "$COMMAND" "$FILE_WITHOUT_EXTENSION")
 
-    mv "$EXECUTABLE" ~/.local/bin/"$COMMAND"
-    printf %"100"s | tr " " "-"
+    #mv "$EXECUTABLE" ~/.local/bin/"$COMMAND"
 done
+echo
+echo "Done."
