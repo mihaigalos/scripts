@@ -32,28 +32,32 @@ function determine_executable() {
     echo $SOURCE
 }
 
-COMPUTE_CHECKSUMS_ONLY=False
-[ $1 = "--compute_checksums_only" ] && COMPUTE_CHECKSUMS_ONLY=True && shift
+function main() {
+    COMPUTE_CHECKSUMS_ONLY=False
+    [ $1 = "--compute_checksums_only" ] && COMPUTE_CHECKSUMS_ONLY=True && shift
 
-until test "$1" = ""
-do
-    TARGET=$1; 
-    [ $COMPUTE_CHECKSUMS_ONLY = False ] && printf %"100"s | tr " " "-" && echo && shift && CHECKSUM=$1
-    shift
+    until test "$1" = ""
+    do
+        TARGET=$1; 
+        [ $COMPUTE_CHECKSUMS_ONLY = False ] && printf %"100"s | tr " " "-" && echo && shift && CHECKSUM=$1
+        shift
 
-    FILE="${TARGET##*/}"
-    FILE_WITHOUT_EXTENSION="${FILE%.*}"
-    COMMAND=$(echo $FILE | cut -d '-' -f1)
+        FILE="${TARGET##*/}"
+        FILE_WITHOUT_EXTENSION="${FILE%.*}"
+        COMMAND=$(echo $FILE | cut -d '-' -f1)
 
-    cd $(mktemp -d)
-    wget --quiet "${TARGET}"
-    [ $COMPUTE_CHECKSUMS_ONLY = True ] && echo -n "$TARGET "&& sha256sum $FILE | cut -d ' ' -f1 | tr '\n' ' ' && echo " \\" && continue
-    echo "$CHECKSUM $FILE" | sha256sum -c || err "Checksum mismatch: $CHECKSUM incorrect."
-    extract_command "$FILE"
+        cd $(mktemp -d)
+        wget --quiet "${TARGET}"
+        [ $COMPUTE_CHECKSUMS_ONLY = True ] && echo -n "$TARGET "&& sha256sum $FILE | cut -d ' ' -f1 | tr '\n' ' ' && echo " \\" && continue
+        echo "$CHECKSUM $FILE" | sha256sum -c || err "Checksum mismatch: $CHECKSUM incorrect."
+        extract_command "$FILE"
 
-    EXECUTABLE=$(determine_executable "$COMMAND" "$FILE_WITHOUT_EXTENSION")
+        EXECUTABLE=$(determine_executable "$COMMAND" "$FILE_WITHOUT_EXTENSION")
 
-    #mv "$EXECUTABLE" ~/.local/bin/"$COMMAND"
-done
-echo
-echo "Done."
+        #mv "$EXECUTABLE" ~/.local/bin/"$COMMAND"
+    done
+    echo
+    echo "Done."
+}
+
+main $@
