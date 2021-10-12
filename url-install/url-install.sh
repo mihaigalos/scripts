@@ -34,10 +34,13 @@ function determine_executable() {
 
 function main() {
     COMPUTE_CHECKSUMS_ONLY=False
-    [ $1 = "--compute_checksums_only" ] && COMPUTE_CHECKSUMS_ONLY=True && shift
+    DRY_RUN=False
 
     until test "$1" = ""
     do
+        [ $1 = "--compute_checksums_only" ] && COMPUTE_CHECKSUMS_ONLY=True && shift
+        [ $1 = "--dry_run" ] && DRY_RUN=True && shift
+
         TARGET=$1; 
         [ $COMPUTE_CHECKSUMS_ONLY = False ] && printf %"100"s | tr " " "-" && echo && shift && CHECKSUM=$1
         shift
@@ -53,8 +56,7 @@ function main() {
         extract_command "$FILE"
 
         EXECUTABLE=$(determine_executable "$COMMAND" "$FILE_WITHOUT_EXTENSION")
-
-        #mv "$EXECUTABLE" ~/.local/bin/"$COMMAND"
+        [ $DRY_RUN = False  ] && mv "$EXECUTABLE" ~/.local/bin/"$COMMAND"
     done
     echo
     echo "Done."
