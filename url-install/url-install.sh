@@ -1,8 +1,5 @@
 #!/bin/bash
 
-####################### Utils
-set -xue
-
 function err() {
     echo -e "\e[1;31m${@}\e[0m" >&2
     exit 1
@@ -35,21 +32,34 @@ function determine_executable() {
     echo $SOURCE
 }
 
-###################### Logic
-for TARGET in "$@"
-do
+function main() {
+    COMPUTE_CHECKSUMS_ONLY=False
+    DRY_RUN=False
 
-    FILE="${TARGET##*/}"
-    FILE_WITHOUT_EXTENSION="${FILE%.*}"
-    COMMAND=$(echo $FILE | cut -d '-' -f1)
+    until test "$1" = ""
+    do
+        [ $1 = "--compute_checksums_only" ] && COMPUTE_CHECKSUMS_ONLY=True && shift
+        [ $1 = "--dry_run" ] && DRY_RUN=True && shift
 
-    cd $(mktemp -d)
-    wget --quiet "${TARGET}"
+        TARGET=$1; 
+        [ $COMPUTE_CHECKSUMS_ONLY = False ] && printf %"100"s | tr " " "-" && echo && shift && CHECKSUM=$1
+        shift
 
-    extract_command "$FILE"
+        FILE="${TARGET##*/}"
+        FILE_WITHOUT_EXTENSION="${FILE%.*}"
+        COMMAND=$(echo $FILE | cut -d '-' -f1)
 
-    EXECUTABLE=$(determine_executable "$COMMAND" "$FILE_WITHOUT_EXTENSION")
+        cd $(mktemp -d)
+        wget --quiet "${TARGET}"
+        [ $COMPUTE_CHECKSUMS_ONLY = True ] && echo -n "$TARGET "&& sha256sum $FILE | cut -d ' ' -f1 | tr '\n' ' ' && echo " \\" && continue
+        echo "$CHECKSUM $FILE" | sha256sum -c || err "Checksum mismatch: $CHECKSUM incorrect."
+        extract_command "$FILE"
 
-    mv "$EXECUTABLE" ~/.local/bin/"$COMMAND"
-    printf %"100"s | tr " " "-"
-done
+        EXECUTABLE=$(determine_executable "$COMMAND" "$FILE_WITHOUT_EXTENSION")
+        [ $DRY_RUN = False  ] && mv "$EXECUTABLE" ~/.local/bin/"$COMMAND"
+    done
+    echo
+    echo "Done."
+}
+
+main $@
