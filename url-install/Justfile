@@ -11,3 +11,9 @@ test:
         --dry_run \
         https://github.com/Byron/dua-cli/releases/download/v2.10.2/dua-v2.10.2-x86_64-unknown-linux-musl.tar.gz 16c241b0446b2b8ae8851f3facacd7604fe4193b2c0a545ae07652300f63a1e8 \
         https://github.com/XAMPPRocky/tokei/releases/download/v12.0.4/tokei-x86_64-unknown-linux-gnu.tar.gz 0e0f0d7139c8c7e3ff20cb243e94bc5993517d88e8be8d59129730607d5c631b
+
+test_download_executable:
+      ./url-install.sh \
+      --dry_run \
+      --no_extract \
+      https://github.com/mihaigalos/tmux-thumbs/releases/download/0.6.0/thumbs d56531dce21f7be80c144fd78d10612640e2985a5d107a0572a352e721919bb1
