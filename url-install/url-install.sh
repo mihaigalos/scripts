@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x 
+
 function err() {
     echo -e "\e[1;31m${@}\e[0m" >&2
     exit 1
