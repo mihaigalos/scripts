@@ -15,5 +15,5 @@ test:
 test_download_executable:
       ./url-install.sh \
       --dry_run \
-      --no_extract \
-      https://github.com/mihaigalos/tmux-thumbs/releases/download/0.6.0/thumbs d56531dce21f7be80c144fd78d10612640e2985a5d107a0572a352e721919bb1
+      --install_all \
+      https://github.com/mihaigalos/tmux-thumbs/releases/download/0.6.0/tmux-thumbs-v0.6.0-x86_64-unknown-linux-gnu.tar.gz 3fcd8c0fe22c812c0a7c36ce04cd02b1f40672c4d371c6878d83b176a334676e

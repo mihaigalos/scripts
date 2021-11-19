@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -x 
 function err() {
     echo -e "\e[1;31m${@}\e[0m" >&2
     exit 1
@@ -36,12 +36,14 @@ function main() {
     COMPUTE_CHECKSUMS_ONLY=False
     DRY_RUN=False
     EXTRACT=True
+    INSTALL_ALL=False
 
     until test "$1" = ""
     do
         [ $1 = "--compute_checksums_only" ] && COMPUTE_CHECKSUMS_ONLY=True && shift
         [ $1 = "--dry_run" ] && DRY_RUN=True && shift
         [ $1 = "--no_extract" ] && EXTRACT=False && shift
+        [ $1 = "--install_all" ] && INSTALL_ALL=True && shift
 
         TARGET=$1; 
         [ $COMPUTE_CHECKSUMS_ONLY = False ] && printf %"100"s | tr " " "-" && echo && shift && CHECKSUM=$1
@@ -55,9 +57,11 @@ function main() {
         wget --quiet "${TARGET}"
         [ $COMPUTE_CHECKSUMS_ONLY = True ] && echo -n "$TARGET "&& sha256sum $FILE | cut -d ' ' -f1 | tr '\n' ' ' && echo " \\" && continue
         echo "$CHECKSUM $FILE" | sha256sum -c || err "Checksum mismatch: $CHECKSUM incorrect."
-        [ $EXTRACT = True ] && extract_command "$FILE"
+        [ $EXTRACT = True ] && extract_command "$FILE" && rm "$FILE"
+        [ $INSTALL_ALL = True ] && chmod +x *
+       
 
-        EXECUTABLE=$(determine_executable "$COMMAND" "$FILE_WITHOUT_EXTENSION")
+        [ $INSTALL_ALL = False ] && EXECUTABLE=$(determine_executable "$COMMAND" "$FILE_WITHOUT_EXTENSION") || EXECUTABLE="*"
         [ $DRY_RUN = False  ] && mv "$EXECUTABLE" ~/.local/bin/"$COMMAND"
     done
     echo
