@@ -61,8 +61,8 @@ function main() {
         [ $INSTALL_ALL = True ] && chmod +x *
        
 
-        [ $INSTALL_ALL = False ] && EXECUTABLE=$(determine_executable "$COMMAND" "$FILE_WITHOUT_EXTENSION") || EXECUTABLE="*"
-        [ $DRY_RUN = False  ] && mv "$EXECUTABLE" ~/.local/bin/"$COMMAND"
+        [ $INSTALL_ALL = False ] && EXECUTABLE=$(determine_executable "$COMMAND" "$FILE_WITHOUT_EXTENSION") || EXECUTABLE=*
+        [ $DRY_RUN = False  ] && mv $EXECUTABLE ~/.local/bin/
     done
     echo
     echo "Done."
