@@ -1,0 +1,30 @@
+default:
+  @just --list --unsorted
+
+connect_to_hidden_wifi:
+    #!/bin/bash
+    set -xuoe
+    uid_of_wifi=$(nmcli connection show | head -2 | tail -1 | sed 's/   */:/g'| cut -d ":" -f2)
+    echo $uid_of_wifi | xargs nmcli connection modify -I {} wifi.hidden yes
+    sudo service network-manager restart
+
+install_service_connect_to_hidden_wifi access_point:
+    #! /bin/sh
+    cat <<EOF >/lib/systemd/system/connect_to_hidden_wifi.service
+
+    [Unit]
+    Description=Manually connect to hidden WiFi
+    Before=network.target
+    After=dbus.service
+
+    [Service]
+    ExecStart=nmcli c up id "{{access_point}}"
+    Type=oneshot
+    RemainAfterExit=yes
+
+    [Install]
+    WantedBy=multi-user.target
+
+    EOF
+
+    systemctl enable connect_to_hidden_wifi.service
