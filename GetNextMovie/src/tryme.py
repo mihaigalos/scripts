@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from getnextmovie import MovieSeasonAndEpisodeExtractor
 
 msae = MovieSeasonAndEpisodeExtractor()
