@@ -8,7 +8,7 @@ import requests
 import subprocess
 import sys
 
-destination = "/mnt/VeraA/incomplete"
+destination = "/mnt/big/incomplete"
 torrent = "new_torrent.torrent"
 
 
