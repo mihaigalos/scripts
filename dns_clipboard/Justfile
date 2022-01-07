@@ -1,0 +1,9 @@
+default:
+  @just --list --unsorted
+
+# Internet clipboard using DNS TXT section
+put_duckdns subdomain token text:
+  curl https://www.duckdns.org/update?domains={{ subdomain }}&token={{ token }}&txt={{ text }}&verbose=true]
+
+get_duckdns subdomain:
+  dig @1.1.1.1 {{ subdomain }}.duckdns.org TXT| grep -A 2 -- "ANSWER SECTION" | grep {{ subdomain }}.duckdns.org | awk '{ print $5 }' | sed -e "s/\"//g
