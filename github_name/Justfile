@@ -1,0 +1,18 @@
+_default:
+  @just --list --unsorted
+
+tool := "github_name"
+docker_container_registry := "ghcr.io"
+docker_user_repo := "mihaigalos"
+docker_image_version := "0.0.1"
+docker_image := docker_container_registry + "/" + docker_user_repo + "/" + tool+ ":" + docker_image_version
+docker_image_dockerhub := docker_user_repo + "/" + tool+ ":" + docker_image_version
+
+run +args:
+    docker run --rm -it {{ docker_image_dockerhub }} {{ args }}
+    
+build +args="":
+    docker build -t {{ docker_image_dockerhub }} {{ args }} .
+
+push:
+    docker push {{ docker_image_dockerhub }}
