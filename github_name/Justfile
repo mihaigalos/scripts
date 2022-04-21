@@ -16,3 +16,10 @@ build +args="":
 
 push:
     docker push {{ docker_image_dockerhub }}
+
+test:
+    #!/bin/bash
+    ok() { echo -e "\e[1;32mOK\e[0m"; }
+    err() { echo -e "\e[1;31m${@}\e[0m" >&2; exit 1; }
+    result=$(just run {{ docker_user_repo }} | tr -d '\r')
+    [[ ${result} == 'mihaigalos # Mihai Galos' ]] && ok || err "Cannot validate logic."
