@@ -8,7 +8,7 @@ docker_image_version := "0.0.1"
 docker_image := docker_container_registry + "/" + docker_user_repo + "/" + tool+ ":" + docker_image_version
 docker_image_dockerhub := docker_user_repo + "/" + tool+ ":" + docker_image_version
 
-run +args:
+run +args="":
     docker run --rm -it {{ docker_image_dockerhub }} {{ args }}
     
 build +args="":
