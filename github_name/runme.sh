@@ -1,6 +1,5 @@
 #!/bin/sh
 
-user=$1
-endpoint=https://github.com
+github_page_of_user=$1
 
-curl -s ${endpoint}/${user} | grep -- '<title>' | sed -e "s|.*<.*>\(.*\)</.*>|\1|" -e "s/[()]//g" | cut -d' ' -f1-3 | awk '{print  $1 " # " $2 " " $3}'
+curl -s ${github_page_of_user} | grep -- '<title>' | sed -e "s|.*<.*>\(.*\)</.*>|\1|" -e "s/[()]//g" | cut -d' ' -f1-3 | awk '{print  $1 " # " $2 " " $3}'
