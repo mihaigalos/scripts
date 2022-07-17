@@ -26,6 +26,8 @@ function determine_executable() {
         SOURCE="$FILE_WITHOUT_EXTENSION/$COMMAND"
     elif [ $(find . -executable -type f | wc -l) -eq 1 ]; then
         SOURCE=$(find . -executable -type f)
+    elif [ $(find . -executable -type f -name $COMMAND | wc -l) -eq 1 ]; then
+        SOURCE=$(find . -executable -type f -name $COMMAND)
     else err Sorry, cannot determine executable.
     fi
 
