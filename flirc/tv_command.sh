@@ -2,6 +2,12 @@
 
 # LG TV 65UJ6309, 164 cm (65 Zoll)
 
+# NEC Infrared Protocol
+# Logical '0' – a 562.5µs pulse burst followed by a 562.5µs space, with a total transmit time of 1.125ms
+# Logical '1' – a 562.5µs pulse burst followed by a 1.6875ms space, with a total transmit time of 2.25ms
+#
+# |-----9ms High-----|-----4.5ms Low-----|-----Address-----|-----/Address-----|-----Command------|-----/Command------|-----562.5us High-----|
+
 if [[ $1 == "play" ]]; then
   [ ! -z $DEBUG ] && echo "play" || true
   sudo ./flirc_util send_ir_raw 0,9092,4451,587,504,587,503,587,1628,561,529,561,530,587,503,588,503,587,504,587,1628,565,1654,587,504,587,1628,561,1658,588,1627,566,1654,587,1628,592,499,561,529,561,530,587,504,587,1628,561,1659,587,503,587,1628,561,1658,587,1628,591,1628,561,1653,566,525,561,529,561,1659,587,503,561
